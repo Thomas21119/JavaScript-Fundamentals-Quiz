@@ -1,4 +1,5 @@
 var timeLeftEl = document.getElementById("timeLeft")
+var showQuestions = document.querySelector('#questions')
 
 var myQuestions = [
     {
@@ -33,25 +34,37 @@ var myQuestions = [
 ]
 var myQuestionsLength = myQuestions.length
 
-var nextQuestionBtn = document.querySelector('#nextQuestionBtn')
+var nextQuestionBtn = document.querySelector('.nextQuestionBtn')
 nextQuestionBtn.addEventListener('click', buildQuiz)
+
 questionEl = document.querySelector('#questionArea')
+var answerAEl = document.querySelector('#a')
+var answerBEl = document.querySelector('#b')
+var answerCEl = document.querySelector('#c')
+var answerDEl = document.querySelector('#d')
 
 let i = 0
 function buildQuiz() {
-    questionEl.textContent = myQuestions[i.question[0]]
-    i++;
+    console.log("test")
+    questionEl.textContent = myQuestions[i].question;
+    answerAEl.textContent = myQuestions[i].answers.a;
+    answerBEl.textContent = myQuestions[i].answers.b;
+    answerCEl.textContent = myQuestions[i].answers.c;
+    answerDEl.textContent = myQuestions[i].answers.d;
+    i++
 }
 
 function score() {
 
 }
-console.log(myQuestions[i.question])
+
+
 var timeLeftEl = document.querySelector('#timeLeft')
 var timeCount = timeLeftEl.textContent = 60;
 
 function startTimer() {
     timeCount = 60;
+    console.log(myQuestions)
     timer = setInterval(function() {
         if (timeCount > 0) {
             timeCount--;
@@ -65,4 +78,12 @@ function startTimer() {
 }
 
 var startButton = document.querySelector("#startButton")
-startButton.addEventListener("click", startTimer, buildQuiz)
+startButton.addEventListener("click", startQuiz)
+
+function startQuiz() {
+    startTimer()
+    startButton.setAttribute('class', 'hidden')
+    console.log('is working?')
+    questions.setAttribute('class', 'visible')
+}
+

@@ -30,6 +30,14 @@ main {
     border-radius: 20px;
 }
 
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
 .questionArea p {
     margin: auto;
     flex-wrap: wrap;
@@ -41,13 +49,17 @@ main {
 .answerArea {
     display: inline-flex;
     height: 50%;
-    width: 10%;
+    width: 30%;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     margin: auto;
     background-color: lightgrey;
     border-radius: 20px;
+}
+
+ol button {
+    width: 100%;
 }
 
 .answerArea ol {

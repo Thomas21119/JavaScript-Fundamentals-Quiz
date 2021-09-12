@@ -15,24 +15,28 @@
         <button type="button"> View highscores </button>
     </header>
     <main>
-        <div class="questionArea">
-            <p>:<span id="questionArea"></span></p>
+        <div class="hidden" id="questions"> 
+        <div class="questionArea" >
+            <p aria-placeholder="Welcome to the JavaScript Quiz press Start"
+            span id="questionArea"></span></p>
         </div>
         <div class="answerArea">
             <!--Link for quiz https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS -->
             <ol>
-                <li> a: <span id="a"> </span> </li>
-                <li> b: <span id="b"> </span> </li>
-                <li> c: <span id="c"> </span> </li>
-                <li> d: <span id="d"> </span> </li>
+                <button type="button" class="nextQuestionBtn"><li> a:<span id="a"> </span> </li></button>
+                <button type="button" class="nextQuestionBtn"><li> b:<span id="b"> </span> </li></button>
+                <button type="button" class="nextQuestionBtn"><li> c:<span id="c"> </span> </li></button>
+                <button type="button" class="nextQuestionBtn"><li> d:<span id="d"> </span> </li></button>
             </ol>
-            <button type="button" id="nextQuestionBtn">Next Question</button>
         </div>
         <div class="timer">
             <h2> Time Left </h2>
             <p>:<span id="timeLeft">60</span></p>
             <h2> Score </h2>
             <p>:<span id="score"></span></p>
+        </div>
+        </div>
+        <div><!--Submission window-->
         </div>
     </main>
 </body>
