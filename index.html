@@ -13,22 +13,15 @@
         <h1>JavaScript Quiz</h1>
         <button type="button" id="startButton"> Start Quiz </button>
         <button type="button"> View highscores </button>
+         <!-- <p aria-placeholder="Welcome to the JavaScript Quiz press Start"
+            span id="questionArea"></span></p> -->
     </header>
     <main>
         <div class="hidden" id="questions"> 
-        <div class="questionArea" >
-            <p aria-placeholder="Welcome to the JavaScript Quiz press Start"
-            span id="questionArea"></span></p>
-        </div>
-        <div class="answerArea">
-            <!--Link for quiz https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS -->
-            <ol>
-                <button type="button" class="nextQuestionBtn"><li> a:<span id="a"> </span> </li></button>
-                <button type="button" class="nextQuestionBtn"><li> b:<span id="b"> </span> </li></button>
-                <button type="button" class="nextQuestionBtn"><li> c:<span id="c"> </span> </li></button>
-                <button type="button" class="nextQuestionBtn"><li> d:<span id="d"> </span> </li></button>
-            </ol>
-        </div>
+            <div class="questionArea" >
+                <h3 id="question"></h3>
+                <div id="options"></div>
+            </div>
         <div class="timer">
             <h2> Time Left </h2>
             <p>:<span id="timeLeft">60</span></p>
