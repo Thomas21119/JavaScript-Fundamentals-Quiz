@@ -44,7 +44,7 @@ function buildQuiz() {
         endQuiz()
     }
 }
-
+var timer;
 var timeLeftEl = document.querySelector('#timeLeft')
 var timeCount = timeLeftEl.textContent = 60;
 
@@ -52,11 +52,16 @@ function startTimer() {
     timeCount = 60;
     timer = setInterval(function() {
 //   want to put an if endquiz happens stop this function
-        if (timeCount > 0) {
+        if(endQuiz){
+            clearInterval(timer)
+        }else 
+        
+
+    if (timeCount > 0) {
             timeCount--;
             timeLeftEl.textContent = timeCount;
         } else {
-           
+            clearInterval(timer);
             return
         }
     },1000);
