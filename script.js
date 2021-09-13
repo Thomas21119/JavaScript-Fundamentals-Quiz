@@ -2,6 +2,7 @@ var timeLeftEl = document.getElementById("timeLeft");
 var showQuestions = document.querySelector('#questions');
 let questionIndex = 0;
 var answerArea = document.querySelector('#options');
+questionArea = document.querySelector('.questionArea')
 
 var myQuestions = [
     {
@@ -31,11 +32,10 @@ var myQuestions = [
 ]
 
 function buildQuiz() {
+    answerArea.innerhtml = ""
     var currentQuestion = myQuestions[questionIndex];
     var questionEl = document.querySelector("#question");
     questionEl.textContent = currentQuestion.question;
-
-    //questionarea.innerhtml = ""
 
     for (var i = 0; i < currentQuestion.answers.length ; i++) {
         var optionEl = document.createElement("button");
