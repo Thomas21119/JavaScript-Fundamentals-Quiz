@@ -30,6 +30,10 @@ main {
 
 }
 
+.btnVisible {
+    display: block;
+}
+
 .hidden {
     display: none;
 }
@@ -81,6 +85,10 @@ main {
     margin: auto;
     background-color: lightgrey;
     border-radius: 20px;
+}
+
+.answerAreaFontSize {
+    font-size: 2rem;
 }
 
 ol button {

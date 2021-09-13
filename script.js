@@ -3,6 +3,7 @@ var showQuestions = document.querySelector('#questions');
 let questionIndex = 0;
 var answerArea = document.querySelector('#options');
 var questionArea = document.querySelector('.questionArea')
+var questionEl = document.querySelector("#question");
 
 var myQuestions = [
     {
@@ -23,13 +24,11 @@ var myQuestions = [
 ]
 
 function buildQuiz() {
+    if(questionIndex < myQuestions.length) {
     questionArea.innerhtml = "";
     answerArea.innerHTML = ""
     var currentQuestion = myQuestions[questionIndex];
-    var questionEl = document.querySelector("#question");
     questionEl.textContent = currentQuestion.question;
-    
-    if(myQuestions[i] != myQuestions.length) {
         for (var i = 0; i < currentQuestion.answers.length ; i++) {
             var optionEl = document.createElement("button");
             var option = currentQuestion.answers[i]
@@ -37,10 +36,11 @@ function buildQuiz() {
             optionEl.setAttribute("value", i);
             answerArea.appendChild(optionEl);
             optionEl.addEventListener("click", optionSelected)
-            console.log(myQuestions[i])
-            console.log(myQuestions.length)
+            console.log('questionIndex:', questionIndex);
+            console.log('Legnth:',myQuestions.length);
         }
     }   else {
+        answerArea.innerHTML = ""
         endQuiz()
     }
 }
@@ -50,8 +50,8 @@ var timeCount = timeLeftEl.textContent = 60;
 
 function startTimer() {
     timeCount = 60;
-    console.log(myQuestions)
     timer = setInterval(function() {
+//   want to put an if endquiz happens stop this function
         if (timeCount > 0) {
             timeCount--;
             timeLeftEl.textContent = timeCount;
@@ -61,6 +61,7 @@ function startTimer() {
         }
     },1000);
 }
+
 
 function optionSelected(){
     //if incorrect
@@ -85,21 +86,25 @@ function optionSelected(){
 
 function endQuiz() {
     //stops timer
+    questionEl.textContent = 'Congratulations on finishing the test'
     console.log(timeCount)
+    // display final time
+    answerArea.textContent = 'your final time is:' + timeCount;
+    var $finalTimeEl = $('#score')
+    $finalTimeEl.textContent = timeCount
+    console.log($finalTimeEl)
     //save time to local scores
-
+    localStorage.setItem('score', timeCount);
     //  display scores as highscores
+    //restart option
+    startButton.setAttribute('class','btnVisible');
 }
-
-function score() {
-
-}
-
 
 var startButton = document.querySelector("#startButton")
 startButton.addEventListener("click", startQuiz)
 
 function startQuiz() {
+    questionIndex = 0
     startTimer();
     startButton.setAttribute('class', 'hidden');
     questions.setAttribute('class', 'visible');
