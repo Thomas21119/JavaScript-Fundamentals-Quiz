@@ -2,7 +2,7 @@ var timeLeftEl = document.getElementById("timeLeft");
 var showQuestions = document.querySelector('#questions');
 let questionIndex = 0;
 var answerArea = document.querySelector('#options');
-questionArea = document.querySelector('.questionArea')
+var questionArea = document.querySelector('.questionArea')
 
 var myQuestions = [
     {
@@ -12,27 +12,19 @@ var myQuestions = [
     },
     {
         question: 'What is the correct JavaScript syntax to change the content of the HTML element <p id="demo"> This is a demonstration </p>',
-        answers: {
-            a: 'document.getElementById("demo").innerHTML = "Hello World!";',
-            b: '#demo.innerHTML = "Hello World!";',
-            c: 'document.getElementByName("p").innerHTML = "Hello World!";',
-            d: 'document.getElement("p").innerHTML = "Hello World!";',
-        },
+        answers: [ 'document.getElementById("demo").innerHTML = "Hello World!";', '#demo.innerHTML = "Hello World!";', 'document.getElementByName("p").innerHTML = "Hello World!";', 'document.getElement("p").innerHTML = "Hello World!";'],
         correctAnswer: 0
     },
     {
         question: 'Where is the correct place to insert a JavaScript',
-        answers: {
-            a: 'The <head> section',
-            b: 'The <body> section',
-            c: 'Both the <head> section and the <body> sections are correct',
-        },
-        correctAnswer: 1,
+        answers: [ 'The <head> section', 'The <body> section', 'Both the <head> section and the <body> sections are correct'],
+        correctAnswer: 1
     },
 ]
 
 function buildQuiz() {
-    answerArea.innerhtml = ""
+    questionArea.innerhtml = "";
+    answerArea.innerHTML = ""
     var currentQuestion = myQuestions[questionIndex];
     var questionEl = document.querySelector("#question");
     questionEl.textContent = currentQuestion.question;
@@ -69,17 +61,17 @@ function startTimer() {
 function optionSelected(){
     //if incorrect
     if(this.value != myQuestions[questionIndex].correctAnswer){
-        console.log("yes");
+        console.log("wrong Answer");
         for (let i = 0; i < 10; i++) {
             timeCount--
           }
         console.log(timeCount);
     } else {
-        console.log("option selected");
+        console.log("Correct answer");
         if(timeCount == 0) {
             endQuiz() 
         }
-        if(myQuestions[questionIndex]-1>myQuestions.length) {
+        if(myQuestions[questionIndex] < myQuestions.length) {
             endQuiz
         }
         questionIndex++
@@ -93,7 +85,11 @@ function optionSelected(){
 }
 
 function endQuiz() {
-    
+    //stops timer
+    console.log(timeCount)
+    //save time to local scores
+
+    //  display scores as highscores
 }
 
 function score() {
