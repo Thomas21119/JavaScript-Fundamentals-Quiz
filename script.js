@@ -28,17 +28,21 @@ function buildQuiz() {
     var currentQuestion = myQuestions[questionIndex];
     var questionEl = document.querySelector("#question");
     questionEl.textContent = currentQuestion.question;
-
-    for (var i = 0; i < currentQuestion.answers.length ; i++) {
-        var optionEl = document.createElement("button");
-        var option = currentQuestion.answers[i]
-        optionEl.textContent = option;
-        optionEl.setAttribute("value", i);
-        answerArea.appendChild(optionEl);
-        optionEl.addEventListener("click", optionSelected)
-
-    }    
-
+    
+    if(myQuestions[i] != myQuestions.length) {
+        for (var i = 0; i < currentQuestion.answers.length ; i++) {
+            var optionEl = document.createElement("button");
+            var option = currentQuestion.answers[i]
+            optionEl.textContent = option;
+            optionEl.setAttribute("value", i);
+            answerArea.appendChild(optionEl);
+            optionEl.addEventListener("click", optionSelected)
+            console.log(myQuestions[i])
+            console.log(myQuestions.length)
+        }
+    }   else {
+        endQuiz()
+    }
 }
 
 var timeLeftEl = document.querySelector('#timeLeft')
@@ -71,16 +75,11 @@ function optionSelected(){
         if(timeCount == 0) {
             endQuiz() 
         }
-        if(myQuestions[questionIndex] < myQuestions.length) {
-            endQuiz
+        if(myQuestions[questionIndex] == myQuestions.length) {
+            endQuiz()
         }
         questionIndex++
         buildQuiz()
-
-    //if you ran out of questions questions index call endquiz
-    // else buildQuiz()
-
-
     }
 }
 
