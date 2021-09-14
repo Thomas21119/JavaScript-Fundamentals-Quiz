@@ -12,11 +12,16 @@
     <header>
         <h1>JavaScript Quiz</h1>
         <button type="button" id="startButton"> Start Quiz </button>
-        <button type="button"> View highscores </button>
-         <!-- <p aria-placeholder="Welcome to the JavaScript Quiz press Start"
-            span id="questionArea"></span></p> -->
+        <button type="button" id="highScoresBtn"> View highscores </button>
     </header>
     <main>
+        <div class="entryPage">
+            <p>
+                Welcome to the fundamentals of JavaScript Quiz, your final score is your time remaining.
+                should you happen to answer a question wrong it will not move to the next question and you
+                shall recieve a 10 second time penalty, please press "Start Quiz" to begin
+            </p>
+        </div>
         <div class="hidden" id="questions"> 
             <div class="questionArea" >
                 <div class="questions"><h3 id="question"></h3></div>
