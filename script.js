@@ -4,8 +4,10 @@ let questionIndex = 0;
 var answerArea = document.querySelector('#options');
 var questionArea = document.querySelector('.questionArea')
 var questionEl = document.querySelector("#question");
-var $entryPage = $('.entryPage')
-
+var $entryPage = $('.entryPage');
+var $form = $('#form');
+var $scoreSubmit = document.querySelector('#scoreSubmit')
+var $initials = document.getElementById("initials").value;
 
 // create an array of objects for each question
 var myQuestions = [
@@ -76,12 +78,13 @@ function startTimer() {
             timeCount--;
             // display new time
             timeLeftEl.textContent = timeCount;
-        } else {
+        } else if(timeCount < 1) {
+            endQuiz()
             // if timer is below 0 clear interval
             clearInterval(timer);
             return
         }
-    },1000);
+    },100);
 }
 
 
@@ -92,9 +95,6 @@ function optionSelected(){
         for (let i = 0; i < 10; i++) {
             timeCount--
         }
-        //   otherwise if timer = 0 end the quiz
-    } else if(timeCount < 1) {
-            endQuiz() 
     } // if test is completed endquiz
       else if(myQuestions[questionIndex] == myQuestions.length) {
             endQuiz()
@@ -105,45 +105,70 @@ function optionSelected(){
     }
 }
 
+var $scoreSubmitBtn = document.querySelector('#scoreSubmitBtn')
+$scoreSubmitBtn.addEventListener('click', submitForm)
+function submitForm() {
+    console.log('submitForm ' + $initials)
 
-function endQuiz() {
-    //stops timer
-    clearInterval(timer)
-    questionEl.innerHTML = ''
-    questionEl.textContent = 'Congratulations on finishing the test'
-    // display final time
-    answerArea.textContent = 'your final time is:' + timeCount;
-    //restart option
-    startButton.setAttribute('class','btnVisible');
-     //save time to local scores
-    if (timeCount > Number(localStorage.getItem('firstPlace'))) {
-        localStorage.setItem('thirdPlace', localStorage.getItem('secondPlace'));
-        localStorage.setItem('secondPlace', localStorage.getItem('firstPlace'));
-        localStorage.setItem('firstPlace', timeCount);
+    if (timeCount > Number(localStorage.getItem('firstScore'))) {
+        // score
+        localStorage.setItem('thirdScore', localStorage.getItem('secondScore'));
+        localStorage.setItem('secondScore', localStorage.getItem('firstScore'));
+        localStorage.setItem('firstScore', timeCount);
+        // initials
+        localStorage.setItem('thirdInitials', localStorage.getItem('secondInitials'));
+        localStorage.setItem('secondInitials', localStorage.getItem('firstInitials'));
+        localStorage.setItem('firstInitials', timeCount);
     
-        } else if (timeCount > Number(localStorage.getItem('secondPlace'))) {
-            localStorage.setItem('thirdPlace', localStorage.getItem('secondPlace'));
-            localStorage.setItem('secondPlace', timeCount);
-        } else if (timeCount > Number(localStorage.getItem('thirdPlace'))){
-            localStorage.setItem('thirdPlace', timeCount);
+        } else if (timeCount > Number(localStorage.getItem('secondScore'))) {
+            localStorage.setItem('thirdScore', localStorage.getItem('secondScore'));
+            localStorage.setItem('secondScore', timeCount);
+
+            localStorage.setItem('thirdInitials', localStorage.getItem('secondInitials'));
+            localStorage.setItem('secondInitials', timeCount);
+        } else if (timeCount > Number(localStorage.getItem('thirdScore'))){
+            localStorage.setItem('thirdScore', timeCount);
+            // initials
+            localStorage.setItem('thirdInitials', timeCount);
         } else{ 
             return
         }
 }
 
+function openForm() {
+   $form.attr('class', '')
+   $scoreSubmit.value = timeCount
+   console.log('openForm' + timeCount)
+}
+
+function endQuiz() {
+    //stops timer
+    clearInterval(timer)
+    questionEl.innerHTML = 'Congratulations on finishing the test'
+    answerArea.innerHTML = 'Your final time is ' + timeCount + ' Seconds' 
+    // display final time
+    openForm()
+    // answerArea.innerHTML = 'your final time is:' + timeCount + ' seconds<br>' + $form.JSON.stringify();
+    //restart option
+    startButton.setAttribute('class','btnVisible');
+     //save time to local scores
+
 // sets highScores to 0 if theres none in place yet
-if (localStorage.getItem('firstPlace') === null) {
-    localStorage.setItem('firstPlace', 0)
+if (localStorage.getItem('firstScore') === null) {
+    localStorage.setItem('firstScore', 0)
+    localStorage.setItem('firstInitials', '0')
 }
 
-if (localStorage.getItem('secondPlace') === null) {
-    localStorage.setItem('secondPlace', 0)
+if (localStorage.getItem('secondScore') === null) {
+    localStorage.setItem('secondScore', 0)
+    localStorage.setItem('secondInitials', '0')
 }
 
-if (localStorage.getItem('thirdPlace') === null) {
-    localStorage.setItem('thirdPlace', 0)
+if (localStorage.getItem('thirdScore') === null) {
+    localStorage.setItem('thirdScore', 0)
+    localStorage.setItem('thirdInitials', '0')
 }
-
+}
 // startquiz button
 var startButton = document.querySelector("#startButton")
 startButton.addEventListener("click", startQuiz)
@@ -164,4 +189,6 @@ function startQuiz() {
 }
 
 var $highScoresBtn = $('#highScoresBtn')
-$highScoresBtn.on('click')
+$highScoresBtn.on('click', )
+
+console.log(typeof $initials) 

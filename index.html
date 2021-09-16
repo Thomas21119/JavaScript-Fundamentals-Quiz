@@ -15,6 +15,25 @@
         <button type="button" id="highScoresBtn"> View highscores </button>
     </header>
     <main>
+        <table class="hidden" id="highScores">
+            <tr>
+                <td id="firstInitials">test</td>
+                <td id="firstScore">test</td>
+            </tr>
+            <tr>
+                <td id="secondInitials">test</td>
+                <td id="secondScore">test</td>
+            </tr>
+            <tr>
+                <td id="thirdInitials">test</td>
+                <td id="thirdScore">test</td>
+            </tr>
+        </table>
+        <form class="hidden" id="form">
+            <input type="text" id="initials" name="fname" placeholder="Initials">
+            <input type="text" id="scoreSubmit" name="fscore" placeholder="Score" readonly>
+            <input type="button" value="Submit" id="scoreSubmitBtn">
+        </form> 
         <div class="entryPage">
             <p>
                 Welcome to the fundamentals of JavaScript Quiz, your final score is your time remaining.
@@ -25,7 +44,10 @@
         <div class="hidden" id="questions"> 
             <div class="questionArea" >
                 <div class="questions"><h3 id="question"></h3></div>
-                <div id="options"><p id="score"></p></div>
+                <div id="options">
+                    <p id="score">
+                    </p>
+                </div>
             </div>
         <div class="timer">
             <h2> Time Left </h2>
