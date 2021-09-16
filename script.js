@@ -56,7 +56,9 @@ function buildQuiz() {
             // add an event listener for if the button is clicked
             optionEl.addEventListener("click", optionSelected)
         }
+        // otherwise test will be done
     }   else {
+        // resets answers.area to blank before moving to endQuiz
         answerArea.text('');
         endQuiz()
     }
@@ -86,7 +88,8 @@ function startTimer() {
             clearInterval(timer);
             return
         }
-    },100);
+        // happens every second
+    },1000);
 }
 
 
@@ -110,8 +113,11 @@ function optionSelected(){
 var $scoreSubmitBtn = document.querySelector('#scoreSubmitBtn')
 $scoreSubmitBtn.addEventListener('click', submitForm)
 function submitForm() {
+    // gets value of initials that people will type in
     let $initials = $('#initials').val()
+    // hides button so only can submit one time at a time
     $scoreSubmitBtn.setAttribute('class' , 'hidden')
+    // if score is greater than a leaderboard score put it on the leaderboard
     if (timeCount > Number(localStorage.getItem('firstScore'))) {
         // score
         localStorage.setItem('thirdScore', localStorage.getItem('secondScore'));
@@ -121,6 +127,7 @@ function submitForm() {
         localStorage.setItem('thirdInitials', localStorage.getItem('secondInitials'));
         localStorage.setItem('secondInitials', localStorage.getItem('firstInitials'));
         localStorage.setItem('firstInitials', $initials);
+        // replace form with Congratulations message
         $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
         return
     
@@ -139,6 +146,7 @@ function submitForm() {
             $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
             return
         } else{ 
+            // replace form with try again message
             $form.text('unfortunately you have not made the highscores, you can see the scores to beat by pressing view highscores, try again!')
             return
         }
@@ -146,19 +154,21 @@ function submitForm() {
 }
 
 function openForm() {
-   $form.attr('class', '')
-   $scoreSubmit.value = timeCount
-   console.log('openForm' + timeCount)
+    // set class to nothing so form becomes visible
+   $form.attr('class', '');
+//    sets score input field (which is unchangable) to the score they recieved
+   $scoreSubmit.value = timeCount;
 }
 
 function endQuiz() {
     //stops timer
-    clearInterval(timer)
-    questionEl.innerHTML = 'Congratulations on finishing the test'
+    clearInterval(timer);
+    // congratulates them
+    questionEl.innerHTML = 'Congratulations on finishing the test';
+     // display final time
     answerArea.text('Your final time is ' + timeCount + ' Seconds') 
-    // display final time
+    // runs openForm
     openForm()
-    // answerArea.innerHTML = 'your final time is:' + timeCount + ' seconds<br>' + $form.JSON.stringify();
     //restart option
     startButton.setAttribute('class','btnVisible');
      //save time to local scores
@@ -184,8 +194,8 @@ var startButton = document.querySelector("#startButton")
 startButton.addEventListener("click", startQuiz)
 
 function startQuiz() {
+    // hides entry page
     $entryPage.attr('class','hidden')
-
     // sets question index to 0 so questions are asked from scratch
     questionIndex = 0
     // starts timer interval function so people can see how theyre going and time can be recorded
