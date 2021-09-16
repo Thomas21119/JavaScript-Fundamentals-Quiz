@@ -8,6 +8,9 @@ var $entryPage = $('.entryPage');
 var $form = $('#form');
 var $scoreSubmit = document.querySelector('#scoreSubmit')
 var $table = $('#highScores')
+var $didMake = $('#didMake')
+var $madeLeaderBoards = $('#in')
+var $missedLeaderBoards = $('#out')
 
 // create an array of objects for each question
 var myQuestions = [
@@ -114,6 +117,7 @@ var $scoreSubmitBtn = document.querySelector('#scoreSubmitBtn')
 $scoreSubmitBtn.addEventListener('click', submitForm)
 function submitForm() {
     // gets value of initials that people will type in
+    
     let $initials = $('#initials').val()
     // hides button so only can submit one time at a time
     $scoreSubmitBtn.setAttribute('class' , 'hidden')
@@ -128,8 +132,9 @@ function submitForm() {
         localStorage.setItem('secondInitials', localStorage.getItem('firstInitials'));
         localStorage.setItem('firstInitials', $initials);
         // replace form with Congratulations message
-        $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
-        return
+        viewHighScores();
+        viewHighScores();
+
     
         } else if (timeCount > Number(localStorage.getItem('secondScore'))) {
             localStorage.setItem('thirdScore', localStorage.getItem('secondScore'));
@@ -137,18 +142,17 @@ function submitForm() {
 
             localStorage.setItem('thirdInitials', localStorage.getItem('secondInitials'));
             localStorage.setItem('secondInitials', $initials);
-            $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
-            return
+            viewHighScores();
+            viewHighScores();
         } else if (timeCount > Number(localStorage.getItem('thirdScore'))){
             localStorage.setItem('thirdScore', timeCount);
             // initials
             localStorage.setItem('thirdInitials', $initials);
-            $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
-            return
+            viewHighScores();
+            viewHighScores();
         } else{ 
             // replace form with try again message
-            $form.text('unfortunately you have not made the highscores, you can see the scores to beat by pressing view highscores, try again!')
-            return
+            
         }
 
 }
@@ -194,6 +198,7 @@ var startButton = document.querySelector("#startButton")
 startButton.addEventListener("click", startQuiz)
 
 function startQuiz() {
+    $scoreSubmitBtn.setAttribute('class' , '')
     // hides entry page
     $entryPage.attr('class','hidden')
     // sets question index to 0 so questions are asked from scratch
@@ -217,9 +222,9 @@ function viewHighScores () {
         var $firstInitials = $('#firstInitials')
         $firstInitials.text('First Place: ' + localStorage.getItem('firstInitials'))
         var $secondInitials = $('#secondInitials')
-        $secondInitials.text('First Place: ' + localStorage.getItem('secondInitials'))
+        $secondInitials.text('Second Place: ' + localStorage.getItem('secondInitials'))
         var $thirdInitials = $('#thirdInitials')
-        $thirdInitials.text('First Place: ' + localStorage.getItem('thirdInitials'))
+        $thirdInitials.text('Third Place: ' + localStorage.getItem('thirdInitials'))
     // Score
         var $firstScore = $('#firstScore')
         $firstScore.text('With a Score of: ' + localStorage.getItem('firstScore'))

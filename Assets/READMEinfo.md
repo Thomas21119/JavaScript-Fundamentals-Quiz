@@ -52,7 +52,7 @@ This homework is graded based on the following criteria:
 
 <!-- * Application loads with no errors., -->
 
-* Application GitHub URL submitted.
+<!-- * Application GitHub URL submitted. -->
 
 <!-- * GitHub repository contains application code. -->
 
@@ -74,7 +74,7 @@ This homework is graded based on the following criteria:
 
 <!-- * Repository contains multiple descripti ve commit messages. -->
 
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
+<!-- * Repository contains quality readme file with description, screenshot, and link to deployed application. -->
 
 ## Review
 

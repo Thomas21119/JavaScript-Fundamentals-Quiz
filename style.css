@@ -121,6 +121,17 @@ form {
     justify-content: flex-end;
 }
 
+.madeHighScores {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: end;
+}
+
+.text {
+    display: flex;
+}
+
 .questionArea button {
     display: block;
     margin: auto auto auto auto;
@@ -132,9 +143,8 @@ form {
     flex-wrap: wrap;
     width: 80%;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    
 }
 
 button {
@@ -165,4 +175,15 @@ button {
     font-weight: bold;
     font-size: 25px;
     text-align: center;
+}
+
+@media screen and (max-width: 900px) {
+    .questionArea h3 {
+        margin: 50px auto;
+        flex-wrap: wrap;
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+    }
+    
 }
