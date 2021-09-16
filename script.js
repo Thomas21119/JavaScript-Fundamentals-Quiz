@@ -1,13 +1,13 @@
-var timeLeftEl = document.getElementById("timeLeft");
-var showQuestions = document.querySelector('#questions');
+var timeLeftEl = $("#timeLeft");
+var showQuestions = $('#questions');
 let questionIndex = 0;
-var answerArea = document.querySelector('#options');
+var answerArea = $('#options');
 var questionArea = document.querySelector('.questionArea')
 var questionEl = document.querySelector("#question");
 var $entryPage = $('.entryPage');
 var $form = $('#form');
 var $scoreSubmit = document.querySelector('#scoreSubmit')
-var $initials = document.getElementById("initials").value;
+var $table = $('#highScores')
 
 // create an array of objects for each question
 var myQuestions = [
@@ -36,7 +36,7 @@ function buildQuiz() {
     if(questionIndex < myQuestions.length) {
     // clear everything
     questionArea.innerhtml = "";
-    answerArea.innerHTML = "";
+    answerArea.text('');
     // let current question equal question depending on index
     var currentQuestion = myQuestions[questionIndex];
     // display current question
@@ -52,12 +52,12 @@ function buildQuiz() {
             // give it a value of whatever i is in current loop
             optionEl.setAttribute("value", i);
             // creates new button option at end of answerArea
-            answerArea.appendChild(optionEl);
+            answerArea.append(optionEl);
             // add an event listener for if the button is clicked
             optionEl.addEventListener("click", optionSelected)
         }
     }   else {
-        answerArea.innerHTML = ""
+        answerArea.text('');
         endQuiz()
     }
 }
@@ -69,6 +69,8 @@ var timeLeftEl = document.querySelector('#timeLeft')
 var timeCount = timeLeftEl.textContent = 60;
 
 function startTimer() {
+    $form.attr('class', 'hidden')
+    
     // set time to 60
     timeCount = 60;
     // repeat this function every second
@@ -108,8 +110,8 @@ function optionSelected(){
 var $scoreSubmitBtn = document.querySelector('#scoreSubmitBtn')
 $scoreSubmitBtn.addEventListener('click', submitForm)
 function submitForm() {
-    console.log('submitForm ' + $initials)
-
+    let $initials = $('#initials').val()
+    $scoreSubmitBtn.setAttribute('class' , 'hidden')
     if (timeCount > Number(localStorage.getItem('firstScore'))) {
         // score
         localStorage.setItem('thirdScore', localStorage.getItem('secondScore'));
@@ -118,21 +120,29 @@ function submitForm() {
         // initials
         localStorage.setItem('thirdInitials', localStorage.getItem('secondInitials'));
         localStorage.setItem('secondInitials', localStorage.getItem('firstInitials'));
-        localStorage.setItem('firstInitials', timeCount);
+        localStorage.setItem('firstInitials', $initials);
+        $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
+        return
     
         } else if (timeCount > Number(localStorage.getItem('secondScore'))) {
             localStorage.setItem('thirdScore', localStorage.getItem('secondScore'));
             localStorage.setItem('secondScore', timeCount);
 
             localStorage.setItem('thirdInitials', localStorage.getItem('secondInitials'));
-            localStorage.setItem('secondInitials', timeCount);
+            localStorage.setItem('secondInitials', $initials);
+            $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
+            return
         } else if (timeCount > Number(localStorage.getItem('thirdScore'))){
             localStorage.setItem('thirdScore', timeCount);
             // initials
-            localStorage.setItem('thirdInitials', timeCount);
+            localStorage.setItem('thirdInitials', $initials);
+            $form.text("Congratulations, you've made the highscores! Press View HighScores to see where you stand!")
+            return
         } else{ 
+            $form.text('unfortunately you have not made the highscores, you can see the scores to beat by pressing view highscores, try again!')
             return
         }
+
 }
 
 function openForm() {
@@ -145,7 +155,7 @@ function endQuiz() {
     //stops timer
     clearInterval(timer)
     questionEl.innerHTML = 'Congratulations on finishing the test'
-    answerArea.innerHTML = 'Your final time is ' + timeCount + ' Seconds' 
+    answerArea.text('Your final time is ' + timeCount + ' Seconds') 
     // display final time
     openForm()
     // answerArea.innerHTML = 'your final time is:' + timeCount + ' seconds<br>' + $form.JSON.stringify();
@@ -183,12 +193,28 @@ function startQuiz() {
     // hides the start quiz button
     startButton.setAttribute('class', 'hidden');
     // shows the beginning of the test
-    showQuestions.setAttribute('class', 'visible');
+    showQuestions.attr('class', 'visible');
     // builds each question and answer
     buildQuiz();
 }
 
 var $highScoresBtn = $('#highScoresBtn')
-$highScoresBtn.on('click', )
+$highScoresBtn.on('click', viewHighScores)
 
-console.log(typeof $initials) 
+function viewHighScores () {
+        $table.toggleClass('hidden');
+        // Initials
+        var $firstInitials = $('#firstInitials')
+        $firstInitials.text('First Place: ' + localStorage.getItem('firstInitials'))
+        var $secondInitials = $('#secondInitials')
+        $secondInitials.text('First Place: ' + localStorage.getItem('secondInitials'))
+        var $thirdInitials = $('#thirdInitials')
+        $thirdInitials.text('First Place: ' + localStorage.getItem('thirdInitials'))
+    // Score
+        var $firstScore = $('#firstScore')
+        $firstScore.text('With a Score of: ' + localStorage.getItem('firstScore'))
+        var $secondScore = $('#secondScore')
+        $secondScore.text('With a Score of: ' + localStorage.getItem('secondScore'))
+        var $thirdScore = $('#thirdScore')
+        $thirdScore.text('With a Score of: ' + localStorage.getItem('thirdScore'))
+}
