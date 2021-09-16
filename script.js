@@ -32,6 +32,12 @@ var myQuestions = [
         // index reference of the correct answer
         correctAnswer: 1
     },
+    {
+        question: 'What is the correct syntax for referring to an external script called "xxx.js"?', 
+        answers: [ '<script src="xxx.js">', '<script href="xxx.js">', '<script name="xxx.js">'],
+        // index reference of the correct answer
+        correctAnswer: 0
+    },
 ]
 
 function buildQuiz() {
